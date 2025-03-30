@@ -1,0 +1,14 @@
+To run the code do 
+1. 
+    source venv/bin/activate
+//This is to activate virutal env
+
+then  "deactivate "
+
+to get out of virutal enviorment
+
+to run do python app.py
+
+//Bug Fixes
+1. The image on the left isnt working currently Fixes
+2. Style.css isnt being implimented properly the html index is not able to link to it

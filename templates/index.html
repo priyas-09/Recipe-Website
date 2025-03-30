@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ojha Recipes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .side-panel {
+            width: 35%;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .side-panel img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #007bff;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-form input[type="text"] {
+            width: 50%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 8px 0 0 8px;
+            outline: none;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .search-form input[type="text"]:focus {
+            box-shadow: 0 0 8px #007bff;
+        }
+
+        .search-form button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            background: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .search-form button:hover {
+            background: #0069d9;
+        }
+
+        .recipes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .recipe {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .recipe img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .recipe h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .recipe p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .recipe a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .recipe a:hover {
+            background: #0069d9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="side-panel">
+            <img src="https://via.placeholder.com/300?text=Chef" alt="Chef Image">
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <h1>Ojha Recipes</h1>
+            </div>
+            <form class="search-form" method="GET" action="/">
+                <input type="text" name="q" placeholder="Search for recipe here" value="{{ query }}">
+                <button type="submit">Search</button>
+            </form>
+            <div class="recipes">
+                {% if recipes %}
+                {% for meal in recipes %}
+                <div class="recipe">
+                    <img src="{{ meal['strMealThumb'] }}" alt="{{ meal['strMeal'] }}">
+                    <h3>{{ meal['strMeal'] }}</h3>
+                    <p><strong>Category:</strong> {{ meal['strCategory'] }}</p>
+                    <p><strong>Area:</strong> {{ meal['strArea'] }}</p>
+                    {% set link = meal['strSource'] if meal['strSource'] else meal['strYoutube'] %}
+                    <a href="{{ link or '#' }}" target="_blank">View Recipe</a>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No recipes found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
